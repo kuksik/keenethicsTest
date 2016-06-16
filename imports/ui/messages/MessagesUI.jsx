@@ -86,7 +86,7 @@ export default createContainer(() => {
 	})
 	
   	return {
-    	messages: Messages.find({}).fetch().reverse(),
+    	messages: Messages.find({}, {sort: {createAt: -1}}).fetch(),
   	};
 }, MessagesUI);
 
