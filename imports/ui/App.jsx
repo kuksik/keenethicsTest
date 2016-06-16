@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
-import AuthorisationUI from './authorisation/AuthorisationUI.jsx';
+import AuthorizationUI from './authorization/AuthorizationUI.jsx';
 import MessagesUI from './messages/MessagesUI.jsx';
 import UserAccountUI from './userAccount/UserAccountUI.jsx';
 
@@ -34,7 +34,7 @@ class App extends Component {
 			:
 				<div className='container'>
 					<h1> Hello, dear Guest! </h1>
-					<AuthorisationUI />
+					<AuthorizationUI />
 				</div>
 				
 		)	

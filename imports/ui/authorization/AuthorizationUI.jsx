@@ -9,7 +9,7 @@ import  RegUI  from './RegistrationUI.jsx'
 
 
 
-export default class AuthorisationUI extends Component {
+export default class AuthorizationUI extends Component {
 	
 	constructor(props) {
     	super(props);
