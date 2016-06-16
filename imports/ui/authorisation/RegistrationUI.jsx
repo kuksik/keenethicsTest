@@ -27,9 +27,9 @@ export default class RegistrationUI extends FORM{
         let newUser = {
             email: ReactDOM.findDOMNode(this.refs.reg_email).value,
             password: ReactDOM.findDOMNode(this.refs.reg_pas).value,
-            profile: {
-                name: ReactDOM.findDOMNode(this.refs.reg_name).value
-            }
+            profile: {},
+            username: ReactDOM.findDOMNode(this.refs.reg_name).value,
+            
         };
 
         if ( newUser.password !== 
@@ -42,9 +42,8 @@ export default class RegistrationUI extends FORM{
         else { 
         	Accounts.createUser(newUser, (err) => {
            		if ( err ) { 
-            		ReactDOM.findDOMNode(this.refs.form)
-            			.getElementsByClassName("error-box")[0]
-            								.innerHTML = err.reason
+            		ReactDOM.findDOMNode(this.refs.errorBox)
+                                        .innerHTML = err.reason
 	            }
         	})
         }
@@ -59,7 +58,7 @@ export default class RegistrationUI extends FORM{
 		   			
 		   			<input
 		   				type = 'text' ref = "reg_name" 
-                        placeholder = "name"
+                        placeholder = "username"
                         onChange={this.onFieldChange.bind(this, "regNameEmpty")}/>
 
                     <input
@@ -78,7 +77,7 @@ export default class RegistrationUI extends FORM{
                         onChange={this.onFieldChange.bind(this, "regConPasEmpty")}/>
 		   			
 
-		   			<div className = 'error-box'></div>
+		   			<div className = 'error-box' ref='errorBox'></div>
 		   			
 		   			<input 
 		   				className='submit-button' 

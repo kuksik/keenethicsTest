@@ -22,6 +22,9 @@ export default class EditLocationUI extends FORM {
     }
 
 	editLocation(location, event) {
+		
+		
+
 		Meteor.call('accounts.setLocation', location, ( err ) => {
 			if ( err ) {
 				console.log( err );
@@ -53,27 +56,29 @@ export default class EditLocationUI extends FORM {
             
         }
 
-        let form =  <form className='form' ref='form' 
-        				onSubmit={this.submitLocation.bind(this)}>
-						<p>Edit location</p>
+        let form =  
+        	<form className='form' ref='form' 
+        		onSubmit={this.submitLocation.bind(this)}>
+				
+				<p>Edit location</p>
            
-	                	<input type="text"  
-	                			onChange={this.handleChange.bind(this)} 
-	                			placeholder="Type here" />
+            	<input type="text"  
+            			onChange={this.handleChange.bind(this)} 
+            			placeholder="Type here" />
 
-	                	<ul  ref='locationsList'> 
-	                		{ locations.map( (elem, i) => ( 
-	                			<li 
-	                				className='list-item' key ={elem._id} 
-	                				style={{"cursor": "pointer"}} 
-	                				onClick={this.editLocation.bind(this, elem.location)}>
-	                				
-	                				{elem.location}
+            	<ul  ref='locationsList'> 
+            		{ locations.map( (elem, i) => ( 
+            			<li 
+            				className='list-item' key ={elem._id} 
+            				style={{"cursor": "pointer"}} 
+            				onClick={this.editLocation.bind(this, elem.location)}>
+            				
+            				{elem.location}
 
-	                			</li> 
-	                		)) }
-	                	</ul>
-	            	</form>;
+            			</li> 
+            		)) }
+            	</ul>
+        	</form>;
 
 		return this.renderPopup(form);
 	}

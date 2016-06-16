@@ -25,7 +25,7 @@ export default class AuthorisationUI extends Component {
 
 	render () {
 		return ( 
-			<div className = 'account-target'>
+			<div className = 'authorisation-target'>
 				{
 					this.state.signin ? 
 					<SigninUI />:

@@ -5,30 +5,56 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Messages } from '../../api/messages.js';
+import FORM from '../classes/FormUIClass.jsx';
 
-
-export default class MessagesUI extends Component {
+export default class MessagesUI extends FORM {
 	
-	addNewMessage(event) {
-    	if (event.charCode === 13 ) { 
-    		event.preventDefault();
-    		Meteor.call('message.insert', 
-                ReactDOM.findDOMNode(this.refs.textInput).value.trim() );
-    		ReactDOM.findDOMNode(this.refs.textInput).value = '';
-    	}
+    constructor(props) {
+        super(props);
+ 
+        this.state = {
+            newMessageEmpty: true,
+        };
+    }
+
+
+	addNewMessage(event) {    
+        event.preventDefault()
+    
+    	Meteor.call('message.insert', 
+            ReactDOM.findDOMNode(this.refs.textInput).value.trim() );
+		ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    	
   	}
+    onKeyDown(event) {
+        if ( event.keyCode == 13 && !event.shiftKey) {
+            event.preventDefault();
+            ReactDOM.findDOMNode(this.refs.addMessage).click();
+        }
+    }
 
 	render() {
 		return (
 
 			<div className='messages-target'>
-		  			<textarea
+	  			<form ref='form'>
+                    <textarea
                         id = 'new-message'
-		  				className = 'new-message default'
-		    			ref="textInput"
-		    			placeholder="Type your message here"
-		    			onKeyPress = {this.addNewMessage.bind(this)}>
-		    		</textarea>
+    	  				className = 'new-message'
+    	    			ref = "textInput"
+    	    			placeholder="Type your message here"
+                        onKeyDown = { this.onKeyDown.bind(this) }
+                        onChange = 
+                            {this.onFieldChange.bind(this, 'newMessageEmpty')}>
+    	    		</textarea>
+                    
+                    <input
+                        type='submit' value='Add new message'
+                        ref = 'addMessage'
+                        className = 'submit-button'
+                        onClick = { this.addNewMessage.bind(this) }
+                        disabled = { this.state.newMessageEmpty }/>
+                </form>
 
     			<ul className='messages-list'>
     				{

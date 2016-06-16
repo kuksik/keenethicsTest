@@ -19,33 +19,38 @@ export default class EditNameUI extends FORM {
 	
 	setName(event) {
 		event.preventDefault();
+		let currentUserName = Meteor.user().username,
+			newUserName = ReactDOM.findDOMNode(this.refs.editName).value.trim();
 
-		Meteor.call('accounts.setName', 
-				ReactDOM.findDOMNode(this.refs.editName).value.trim(), ( err ) => {
+		Meteor.call('accounts.setName', newUserName, ( err ) => {
 			if ( err ) {
-				console.log( err );
+				ReactDOM.findDOMNode(this.refs.errorBox).innerHTML = err.reason;
 			}
 			else {
+				Meteor.call('message.updateUserName', currentUserName, newUserName);
 				this.refs.parentPopup.click();
 			}
 		})
 	}
 
 	render() {
-		let form = <form className='form' ref='form'>
-						<p>Change name</p>
+		let form = 
+			<form className='form' ref='form'>
+				<p>Change name</p>
 
-						<input 
-							type='text' ref='editName' 
-							onChange={this.onFieldChange.bind(this, 'nameEmpty')} 
-							placeholder='Type new name'/>
-						
-						<input 
-							className='submit-button' type='submit' 
-							disabled = {this.state.nameEmpty}
-							onClick={this.setName.bind(this)}
-							value='Submit'/>
-					</form>
+				<input 
+					type='text' ref='editName' 
+					onChange={this.onFieldChange.bind(this, 'nameEmpty')} 
+					placeholder='Type new name'/>
+				
+				<div className = 'error-box' ref = 'errorBox'></div>
+
+				<input 
+					className='submit-button' type='submit' 
+					disabled = {this.state.nameEmpty}
+					onClick={this.setName.bind(this)}
+					value='Submit'/>
+			</form>
 
 		return this.renderPopup(form);
 	}

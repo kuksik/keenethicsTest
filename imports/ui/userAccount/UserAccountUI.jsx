@@ -12,8 +12,8 @@ import EditLocationUI from './EditLocationUI.jsx';
 
 
 
-export default class CabinetUI extends Component{	
-	
+export default class UserAccountUI extends Component{	
+
 	componentDidMount() {
 		let editButtons = this.refs.editButtons;
 		window.addEventListener('click', function(event) {
@@ -56,21 +56,23 @@ export default class CabinetUI extends Component{
 		ReactDOM.findDOMNode(this.refs.editButtons).style.display = 'block';
 	}
 	
-
+// <div className='account-manage'>
 	render() {
 		return(
-			<div className='user-cabinet'>
-				<div className='account-manage'>
+			<div className='userAccount-target'>
+				
+
 	    			<div className='button' onClick={this.logout.bind(this)}>
 	    				Logout
 	    			</div>
+	    		
 	    			<div  onClick={function(e) {e.stopPropagation()}}>
 
 		    			<div className='button' onClick={this.showMenu.bind(this)}>
 		    				Edit profile info
 		    			</div>
 		    		
-		    			<ul className='edit-buttons' ref='editButtons'>
+		    			<ul className='userAccount-menu' ref='editButtons'>
 	    					<li className='list-item' 
 	    						onClick={this.renderPopup.bind(this, 'name')}>
     							Edit name
@@ -91,9 +93,8 @@ export default class CabinetUI extends Component{
     							Edit location
     						</li>
 		    			</ul>
-
-		    		</div>
-    			</div>
+		    		
+    				</div>
     	
     			<div ref='popupTarget'></div>			
 			</div>

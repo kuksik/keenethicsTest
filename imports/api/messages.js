@@ -13,13 +13,25 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
+
+	'message.updateUserName'(currentUserName, newUserName) {
+		check(currentUserName, String);
+		check(newUserName, String);
+		Messages.update(
+			{ 'username': currentUserName }, 
+			{ $set: { 'username': newUserName } },
+			{ multi: true }
+		);
+	},
+
+
 	'message.insert'(text) {
 		Messages.insert({
 			'text': text,
 			'createAt': new Date(),
 			'userLocation': Meteor.user().profile.location,
 			'userId': Meteor.userId(),
-			'username': Meteor.user().profile.name
+			'username': Meteor.user().username
 		})
 	}
 })

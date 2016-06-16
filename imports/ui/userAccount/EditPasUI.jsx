@@ -23,63 +23,60 @@ export default class EditPasUI extends FORM {
 	
 	resetPas(event) {
 		event.preventDefault();
-		
-		let data = {
-			currentPas: ReactDOM.findDOMNode(this.refs.currentPas).value.trim(),
-			newPas: ReactDOM.findDOMNode(this.refs.newPas).value.trim()
-		};
+		let currentPas = ReactDOM.findDOMNode(this.refs.currentPas).value.trim(),
+			newPas = ReactDOM.findDOMNode(this.refs.newPas).value.trim();
 
-		if ( data.newPas !== ReactDOM.findDOMNode(this.refs.confirmNewPas).value ) {
-			ReactDOM.findDOMNode(this.refs.form).
-				getElementsByClassName('error-box')[0].innerHTML = 
+		if ( newPas !== 
+					ReactDOM.findDOMNode(this.refs.confirmNewPas).value ) {
+
+			ReactDOM.findDOMNode(this.refs.errorBox).innerHTML = 
 										'New passwords do not match';
 		}
 		else {
-			Meteor.call('accounts.setPassword', data, ( err, res ) => {
-				if ( err ) {
-					console.log(err)
-				}
-				else {
-					if ( res.err ) {
-						ReactDOM.findDOMNode(this.refs.form).
-							getElementsByClassName('error-box')[0].innerHTML = 
-										'Please type correct current password';
-					}
-					else {
-						this.refs.parentPopup.click();
-					}
-				}
-			});
+			Accounts.changePassword(currentPas, newPas, ( err ) => {
+			if ( err ) {
+				ReactDOM.findDOMNode(this.refs.errorBox).innerHTML = err.reason;
+			}
+			else {
+				this.refs.parentPopup.click();
+			}
+		})
 		}
 	}
 	
 	render() {
-		let form = 	<form className='form' ref='form'>
-						<p>Change password</p>
-						<input 
-							type='password' ref='currentPas' 
-							onChange={this.onFieldChange.bind(this, 'currentPasEmpty')} 
-							placeholder='Current password'/>
-						<input 
-							type='password' ref='newPas' 
-							onChange={this.onFieldChange.bind(this, 'newPasEmpty')} 
-							placeholder='New password'/>
-						<input 
-							type='password' ref='confirmNewPas' 
-							onChange={this.onFieldChange.bind(this, 'confirmNewPasEmpty')} 
-							placeholder='Confirm new password'/>
-						<div className = 'error-box'></div>
-						<input 
-							className='submit-button'
-							type='submit' 
-							disabled = {
-								this.state.currentPasEmpty || 
-								this.state.newPasEmpty || 
-								this.state.confirmNewPasEmpty
-							}
-							onClick={this.resetPas.bind(this)}
-							value='Submit'/>
-						</form>;
+		let form = 	
+			<form className='form' ref='form'>
+				<p>Change password</p>
+				
+				<input 
+					type='password' ref='currentPas' 
+					onChange={this.onFieldChange.bind(this, 'currentPasEmpty')} 
+					placeholder='Current password'/>
+				
+				<input 
+					type='password' ref='newPas' 
+					onChange={this.onFieldChange.bind(this, 'newPasEmpty')} 
+					placeholder='New password'/>
+				
+				<input 
+					type='password' ref='confirmNewPas' 
+					onChange={this.onFieldChange.bind(this, 'confirmNewPasEmpty')} 
+					placeholder='Confirm new password'/>
+
+				<div className = 'error-box' ref = 'errorBox'></div>
+				
+				<input 
+					className='submit-button'
+					type='submit' 
+					disabled = {
+						this.state.currentPasEmpty || 
+						this.state.newPasEmpty || 
+						this.state.confirmNewPasEmpty
+					}
+					onClick={this.resetPas.bind(this)}
+					value='Submit'/>
+			</form>;
 
 		return 	this.renderPopup(form);
 	}

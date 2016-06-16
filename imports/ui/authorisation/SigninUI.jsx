@@ -13,7 +13,6 @@ export default class SigninUI extends FORM{
     	super(props);
  
     	this.state = {
-        	
         	signinEmailEmpty: true,
         	signinPasEmpty: true,
       	};
@@ -27,8 +26,8 @@ export default class SigninUI extends FORM{
 		
 		Meteor.loginWithPassword(email, pas, ( err ) => {
 				if ( err ) {
-					ReactDOM.findDOMNode(this.refs.form).
-						getElementsByClassName('error-box')[0].innerHTML = err.reason;
+					ReactDOM.findDOMNode(this.refs.errorBox)
+										.innerHTML = err.reason;
 				}
 		});
 	}
@@ -48,7 +47,7 @@ export default class SigninUI extends FORM{
 		   				onChange={this.onFieldChange.bind(this, 'signinPasEmpty')} 
 		   				placeholder='password'/>
 		   			
-		   			<div className = 'error-box'></div>
+		   			<div className = 'error-box' ref='errorBox'></div>
 		   			
 		   			<input 
 		   				className='submit-button' 
@@ -56,7 +55,7 @@ export default class SigninUI extends FORM{
 		   				disabled = {this.state.siginEmailEmpty || 
 		   					this.state.signinPasEmpty
 		   				}
-		   				value='Signin'/>
+		   				value='SignIn'/>
 		   		</form>
 	)}
 }

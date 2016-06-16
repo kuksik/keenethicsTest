@@ -9,19 +9,19 @@ import UserAccountUI from './userAccount/UserAccountUI.jsx';
 
 
 class App extends Component {
-	
-
 	render() {
+		
 		return (
 			
 			this.props.currentUser ? 
 				<div className='container'>
-					<h1> Hello,  { this.props.currentUser.profile.name } </h1>
+					<h1> Hello,  { this.props.currentUser.username } </h1>
 					<UserAccountUI />
 					{ this.props.currentUser.profile.location ? 
 						<span>
 							<h3>
-								Your location: { this.props.currentUser.profile.location }
+								Your location: { 
+									this.props.currentUser.profile.location }
 							</h3>
 							<MessagesUI /> 
 						</span>
@@ -41,7 +41,6 @@ class App extends Component {
 	}
 };
 
-// App.defaultProps  = { return { currentUser: Meteor.user() } } 
 
 export default createContainer(() => {
   	return {

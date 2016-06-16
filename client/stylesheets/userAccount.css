@@ -1,0 +1,61 @@
+.userAccount-target {
+	position: fixed;
+	right: 60px;
+	z-index: 10;
+	top: 83px;
+}
+
+	.userAccount-target > div {
+		display: inline-table;
+	}
+
+
+		.userAccount-menu {
+			display: none;
+			margin: 0px 10px;	
+		}
+
+
+		.list-item {
+			text-align: center;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding:10px;
+			background-color: #f5f5ef;	
+		}
+		.list-item:hover{
+			color:white;
+		}
+
+
+.parent-popup {
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	z-index: 20;
+	top: 0;
+	left: 0;
+}
+	.popup {
+		border: 1px solid black;
+		width: 200px;
+		margin-left: auto;
+	    margin-right: auto;
+	    position: relative;
+	    top: 100px;
+	    padding: 15px;
+	    background-color: white;
+	    text-align: center;
+	}
+		.close-popup-button {
+			position: absolute;
+			top:-17px;
+			left: 232px;
+			cursor: pointer;
+			color: grey;
+		}
+		.close-popup-button:hover {
+			color:white;
+		}
