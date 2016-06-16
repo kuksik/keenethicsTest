@@ -45,39 +45,38 @@ export default class EditPasUI extends FORM {
 	}
 	
 	render() {
-		let form = 	
-			<form className='form' ref='form'>
-				<p>Change password</p>
-				
-				<input 
-					type='password' ref='currentPas' 
-					onChange={this.onFieldChange.bind(this, 'currentPasEmpty')} 
-					placeholder='Current password'/>
-				
-				<input 
-					type='password' ref='newPas' 
-					onChange={this.onFieldChange.bind(this, 'newPasEmpty')} 
-					placeholder='New password'/>
-				
-				<input 
-					type='password' ref='confirmNewPas' 
-					onChange={this.onFieldChange.bind(this, 'confirmNewPasEmpty')} 
-					placeholder='Confirm new password'/>
+		return 	this.renderPopup(
+					<form className='form' ref='form'>
+						<p>Change password</p>
+						
+						<input 
+							type='password' ref='currentPas' 
+							onChange={this.onFieldChange.bind(this, 'currentPasEmpty')} 
+							placeholder='Current password'/>
+						
+						<input 
+							type='password' ref='newPas' 
+							onChange={this.onFieldChange.bind(this, 'newPasEmpty')} 
+							placeholder='New password'/>
+						
+						<input 
+							type='password' ref='confirmNewPas' 
+							onChange={this.onFieldChange.bind(this, 'confirmNewPasEmpty')} 
+							placeholder='Confirm new password'/>
 
-				<div className = 'error-box' ref = 'errorBox'></div>
-				
-				<input 
-					className='submit-button'
-					type='submit' 
-					disabled = {
-						this.state.currentPasEmpty || 
-						this.state.newPasEmpty || 
-						this.state.confirmNewPasEmpty
-					}
-					onClick={this.resetPas.bind(this)}
-					value='Submit'/>
-			</form>;
-
-		return 	this.renderPopup(form);
+						<div className = 'error-box' ref = 'errorBox'></div>
+						
+						<input 
+							className='submit-button'
+							type='submit' 
+							disabled = {
+								this.state.currentPasEmpty || 
+								this.state.newPasEmpty || 
+								this.state.confirmNewPasEmpty
+							}
+							onClick={this.resetPas.bind(this)}
+							value='Submit'/>
+					</form>
+				);
 	}
 }

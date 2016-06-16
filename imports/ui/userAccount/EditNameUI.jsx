@@ -33,25 +33,24 @@ export default class EditNameUI extends FORM {
 		})
 	}
 
-	render() {
-		let form = 
-			<form className='form' ref='form'>
-				<p>Change name</p>
+	render() {			
+		return this.renderPopup(
+					<form className='form' ref='form'>
+						<p>Change name</p>
 
-				<input 
-					type='text' ref='editName' 
-					onChange={this.onFieldChange.bind(this, 'nameEmpty')} 
-					placeholder='Type new name'/>
-				
-				<div className = 'error-box' ref = 'errorBox'></div>
+						<input 
+							type='text' ref='editName' 
+							onChange={this.onFieldChange.bind(this, 'nameEmpty')} 
+							placeholder='Type new name'/>
+						
+						<div className = 'error-box' ref = 'errorBox'></div>
 
-				<input 
-					className='submit-button' type='submit' 
-					disabled = {this.state.nameEmpty}
-					onClick={this.setName.bind(this)}
-					value='Submit'/>
-			</form>
-
-		return this.renderPopup(form);
+						<input 
+							className='submit-button' type='submit' 
+							disabled = {this.state.nameEmpty}
+							onClick={this.setName.bind(this)}
+							value='Submit'/>
+					</form>
+				);
 	}
 }
