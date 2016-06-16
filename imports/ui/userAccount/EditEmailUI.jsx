@@ -59,25 +59,5 @@ export default class EditEmailUI extends FORM{
 							value='Submit'/>
 					</form>
 				);
-		// let form = 	
-			// <form className='form' ref='form'>
-			// 	<p>Change email</p>
-			// 	<input 
-			// 		type='text' 
-			// 		ref='editEmail' 
-			// 		onChange={this.onFieldChange.bind(this, 'emailEmpty')} 
-			// 		placeholder='Type new email address'/>
-				
-			// 	<div className = 'error-box' ref = 'errorBox'></div>
-
-			// 	<input 
-			// 		className='submit-button'
-			// 		type='submit' 
-			// 		disabled = {this.state.emailEmpty}
-			// 		onClick={this.setEmail.bind(this)}
-			// 		value='Submit'/>
-			// </form>;
-
-		
 	}
 }

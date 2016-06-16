@@ -16,13 +16,20 @@ export default class FORM extends Component {
 
 	closeForm(event) {
 		event.stopPropagation();
-		document.getElementById('parent-popup').remove();	
+		ReactDOM.findDOMNode(this.refs.parentPopup).remove();
+	}
+	
+	onKeyDown(event) {
+		if ( event.keyCode === 27 ) {
+			ReactDOM.findDOMNode(this.refs.parentPopup).remove();
+		}
 	}
 
 	renderPopup(form) {
 		return (
 			<div id='parent-popup' className='parent-popup' ref='parentPopup' 
-					  						onClick={this.closeForm.bind(this)}>
+					  						onClick={this.closeForm.bind(this)}
+					  						onKeyDown = {this.onKeyDown.bind(this)}>
 				<div className = 'popup' ref='popup' 
 						onClick={ function(event) { event.stopPropagation() } }>
 
