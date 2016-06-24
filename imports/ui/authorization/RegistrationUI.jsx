@@ -40,11 +40,17 @@ export default class RegistrationUI extends FORM{
         				.innerHTML = "Passwords do not match" ;
 		}
         else { 
+
         	Accounts.createUser(newUser, (err) => {
            		if ( err ) { 
             		ReactDOM.findDOMNode(this.refs.errorBox)
                                         .innerHTML = err.reason
+
 	            }
+                Meteor.call('sendVerificationEmail', ( err ) => {
+                        if ( err ) { console.log(err) }
+                    })
+                
         	})
         }
 

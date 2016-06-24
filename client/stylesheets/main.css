@@ -1,6 +1,25 @@
 body {
-	padding: 60px;
+	padding: 30px;
 }
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+a:visited {
+	color:black;
+}
+.page-target {
+	z-index: 10;
+}
+.active {
+	color: red;
+	background-color: red;
+}
+/*
 
 h1, h3 {
 	margin: 15px 0px;
@@ -63,3 +82,4 @@ input {
 
 }
 
+*/

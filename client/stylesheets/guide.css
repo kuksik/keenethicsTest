@@ -1,31 +1,37 @@
-.userAccount-target {
-	position: fixed;
-	right: 60px;
-	z-index: 10;
-	top: 83px;
+.guide-target > div {
+	display: inline-table;
 }
+.sectors-target {
+	width: 150px;
+	background-color: #f5f5ef;
+}
+	.sector-item{
+		font-size: 20px;
+		text-align: center;
+		cursor: pointer;
+		padding: 10px;
+		font-weight: bold;
 
-	.userAccount-target > div {
-		display: inline-table;
+	}
+	.sector-item:hover {
+		color:white;
 	}
 
-
-		.userAccount-menu {
-			display: none;
-			margin: 0px 10px;	
+	.route-item {
+		padding: 10px;
+		margin: 0;
+		cursor: pointer;
+		margin: 5px;
+	}
+		.add-comment {
+			float: right;
+			padding: 5px;	
+			background-color: #00b300;
+		}
+		.add-comment:hover {
+			color: white;
 		}
 
-
-		.list-item {
-			text-align: center;
-			cursor: pointer;
-			margin-bottom: 1px;
-			padding:10px;
-			background-color: #f5f5ef;	
-		}
-		.list-item:hover{
-			color:white;
-		}
 
 
 .parent-popup {

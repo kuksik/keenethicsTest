@@ -8,7 +8,10 @@ import { Accounts } from 'meteor/accounts-base'
 
 Meteor.methods({
 
-	
+	'sendVerificationEmail'() {
+		console.log('sendEMail')
+		Accounts.sendVerificationEmail(Meteor.userId(), 'nazarkukarkin@gmail.com')
+	},
 
 	'accounts.setName'(newUserName) {
 		check(newUserName, String)
@@ -17,6 +20,13 @@ Meteor.methods({
 
 	'accounts.setEmail'(newEmail) {
 		check(newEmail,String);
+
+		// Email.send({
+  //     		to: 'smaggot@ukr.net',
+  //     		from: "keeneticsTest@gmail.com",
+  //  	   	    subject: "Your order confirmed!",
+  //  	   		html: 'hello'
+  //   	});  
 
 		if ( Accounts.findUserByEmail(newEmail) ) {
 			return { err: true };
